@@ -1,0 +1,11 @@
+{
+  "name": "devmeet",
+  "version": "1.0.0",
+  "description": "A Social Network for Developers",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Ritesh Arora",
+  "license": "ISC"
+}
