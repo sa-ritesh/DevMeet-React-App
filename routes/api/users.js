@@ -65,9 +65,17 @@ router.post(
         },
       };
       //return JWT
-      return res.json(200, {
-        token: jwt.sign(user.id, config.get("jwtSecret")),
-      });
+      jwt.sign(
+        payload,
+        config.get("jwtSecret"),
+        {
+          expiresIn: 36000,
+        },
+        (err, token) => {
+          if (err) throw err;
+          res.json({ token });
+        },
+      );
     } catch (err) {
       console.log(err);
       res.send("ERROR");
