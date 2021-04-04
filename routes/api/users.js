@@ -2,6 +2,8 @@ const express = require("express");
 const User = require("../../models/User");
 const gravatar = require("gravatar");
 const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
+const config = require("Config");
 
 const { check, validationResult } = require("express-validator/check");
 const router = express.Router();
@@ -45,6 +47,7 @@ router.post(
         r: "pg",
         d: "mm",
       });
+      // Creating user Instance
       user = new User({
         name,
         email,
@@ -54,10 +57,19 @@ router.post(
 
       const salt = await bcrypt.genSalt(10);
       user.password = await bcrypt.hash(password, salt);
-
+      // Saving USER
       await user.save();
-      return res.send("User Registered!!");
+      const payload = {
+        user: {
+          id: user.id,
+        },
+      };
+      //return JWT
+      return res.json(200, {
+        token: jwt.sign(user.id, config.get("jwtSecret")),
+      });
     } catch (err) {
+      console.log(err);
       res.send("ERROR");
     }
   },
