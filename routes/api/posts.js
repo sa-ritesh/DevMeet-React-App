@@ -60,4 +60,66 @@ router.get("/:id", auth, async (req, res) => {
     return res.status(500).json({ message: "Internal Server Error" });
   }
 });
+//Delete a Post
+router.delete("/:id", auth, async (req, res) => {
+  try {
+    const post = await Post.findById(req.params.id);
+    if (!post) {
+      return res.status(404).json({ msg: "Post not found" });
+    }
+    if (post.user.toString() !== req.user.id) {
+      return res.status(401).json({ msg: "Unauthorized" });
+    }
+    await post.remove();
+    return res.status(200).json({ msg: "Post Removed" });
+  } catch (err) {
+    console.log(err);
+    if (err.kind === "ObjectId") {
+      return res.status(404).json({ msg: "Post not found" });
+    }
+    return res.status(500).json({ message: "Internal Server Error" });
+  }
+});
+//add like to post
+router.put("/like/:id", auth, async (req, res) => {
+  try {
+    const post = await Post.findById(req.params.id);
+    if (
+      post.likes.filter((like) => like.user.toString() === req.user.id).length >
+      0
+    ) {
+      return res.status(400).json({ msg: "Post already Liked" });
+    }
+    post.likes.unshift({ user: req.user.id });
+    await post.save();
+
+    return res.json(post.likes);
+  } catch (err) {
+    console.log(err);
+    return res.status(500).json({ message: "Internal Server Error" });
+  }
+});
+
+//unlike the post
+router.put("/unlike/:id", auth, async (req, res) => {
+  try {
+    const post = await Post.findById(req.params.id);
+    if (
+      post.likes.filter((like) => like.user.toString() === req.user.id)
+        .length === 0
+    ) {
+      return res.status(400).json({ msg: "Post has not been yet liked" });
+    }
+    const removeIndex = post.likes
+      .map((like) => like.user.toString())
+      .indexOf(req.user.id);
+    post.likes.splice(removeIndex, 1);
+    await post.save();
+
+    return res.json(post.likes);
+  } catch (err) {
+    console.log(err);
+    return res.status(500).json({ message: "Internal Server Error" });
+  }
+});
 module.exports = router;
