@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { setAlert } from "../../actions/alert";
 import PropTypes from "prop-types";
 import Alert from "../layout/Alert";
+import { register } from "../../actions/auth";
 
 const Register = (props) => {
   const [formData, setFormData] = useState({
@@ -20,6 +21,7 @@ const Register = (props) => {
       props.dispatch(setAlert("Password do not match", "danger"));
     } else {
       console.log(formData);
+      props.dispatch(register({ name, email, password }));
     }
   };
   const onChange = (e) => {
