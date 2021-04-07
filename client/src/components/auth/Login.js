@@ -1,6 +1,6 @@
 import React, { Fragment, useState } from "react";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import { login } from "../../actions/auth";
 
 const Login = (props) => {
@@ -17,6 +17,9 @@ const Login = (props) => {
   const onChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
+  if (props.isAuthenticated) {
+    return <Redirect to="/dashboard" />;
+  }
   return (
     <Fragment>
       <h1 className="large text-primary">Sign Up</h1>
@@ -53,7 +56,7 @@ const Login = (props) => {
 };
 function mapStateToProps(state) {
   return {
-    auth: state.auth,
+    isAuthenticated: state.auth.isAuthenticated,
   };
 }
-export default connect()(Login);
+export default connect(mapStateToProps)(Login);

@@ -1,4 +1,5 @@
-import React from "react";
+import React, { Fragment } from "react";
+import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 
 const Landing = (props) => {
@@ -12,17 +13,25 @@ const Landing = (props) => {
             other developers
           </p>
           <div className="buttons">
-            <Link to="register" className="btn btn-primary">
-              Sign Up
-            </Link>
-            <Link to="login" className="btn btn-light">
-              Login
-            </Link>
+            {props.isAuthenticated && (
+              <Fragment>
+                <Link to="register" className="btn btn-primary">
+                  Sign Up
+                </Link>
+                <Link to="login" className="btn btn-light">
+                  Login
+                </Link>
+              </Fragment>
+            )}
           </div>
         </div>
       </div>
     </section>
   );
 };
-
-export default Landing;
+function mapStateToProps(state) {
+  return {
+    isAuthenticated: state.auth.isAuthenticated,
+  };
+}
+export default connect()(Landing);
