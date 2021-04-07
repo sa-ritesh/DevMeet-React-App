@@ -1,7 +1,9 @@
 import React, { Fragment, useState } from "react";
+import { connect } from "react-redux";
 import { Link } from "react-router-dom";
+import { login } from "../../actions/auth";
 
-const Login = () => {
+const Login = (props) => {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -10,6 +12,7 @@ const Login = () => {
   const onSubmit = (e) => {
     e.preventDefault();
     console.log(formData);
+    props.dispatch(login(email, password));
   };
   const onChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -48,5 +51,9 @@ const Login = () => {
     </Fragment>
   );
 };
-
-export default Login;
+function mapStateToProps(state) {
+  return {
+    auth: state.auth,
+  };
+}
+export default connect()(Login);
