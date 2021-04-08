@@ -1,8 +1,11 @@
 import React, { Fragment } from "react";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 
 const Landing = (props) => {
+  if (props.isAuthenticated) {
+    return <Redirect to="/dashboard" />;
+  }
   return (
     <section className="landing">
       <div className="dark-overlay">
@@ -13,16 +16,14 @@ const Landing = (props) => {
             other developers
           </p>
           <div className="buttons">
-            {props.isAuthenticated && (
-              <Fragment>
-                <Link to="register" className="btn btn-primary">
-                  Sign Up
-                </Link>
-                <Link to="login" className="btn btn-light">
-                  Login
-                </Link>
-              </Fragment>
-            )}
+            <Fragment>
+              <Link to="register" className="btn btn-primary">
+                Sign Up
+              </Link>
+              <Link to="login" className="btn btn-light">
+                Login
+              </Link>
+            </Fragment>
           </div>
         </div>
       </div>
@@ -34,4 +35,4 @@ function mapStateToProps(state) {
     isAuthenticated: state.auth.isAuthenticated,
   };
 }
-export default connect()(Landing);
+export default connect(mapStateToProps)(Landing);

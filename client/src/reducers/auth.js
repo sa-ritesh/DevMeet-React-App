@@ -5,6 +5,7 @@ import {
   LOGOUT,
   REGISTER_FAIL,
   REGISTER_SUCCESS,
+  SET_LOADER,
   USER_LOADED,
 } from "../actions/types";
 
@@ -42,6 +43,11 @@ export default function register(state = initialState, action) {
         ...state,
         isAuthenticated: false,
         loading: false,
+      };
+    case SET_LOADER:
+      return {
+        ...state,
+        loading: true,
       };
     default:
       return state;
