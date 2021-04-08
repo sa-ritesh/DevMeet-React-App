@@ -6,6 +6,8 @@ import Spinner from "../layout/Spinner";
 import { Link } from "react-router-dom";
 import DashboardActions from "./DashboardActions";
 import Alert from "../layout/Alert";
+import Experience from "./Experience";
+import Education from "./Education";
 
 const Dashboard = (props) => {
   useEffect(() => {
@@ -25,6 +27,8 @@ const Dashboard = (props) => {
       {props.profile !== null ? (
         <Fragment>
           <DashboardActions />
+          <Experience />
+          <Education />
         </Fragment>
       ) : (
         <Fragment>
