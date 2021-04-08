@@ -44,7 +44,7 @@ function Navbar(props) {
     <nav className="navbar bg-dark">
       <h1>
         <Link to="/">
-          <i className="fas fa-code"></i> DevConnector
+          <i className="fas fa-code"></i> DevMeet
         </Link>
       </h1>
       {!props.auth.loading && (
