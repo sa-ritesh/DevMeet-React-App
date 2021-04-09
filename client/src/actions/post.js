@@ -131,7 +131,6 @@ export const getPost = (postId) => {
         type: GET_POST,
         payload: res.data,
       });
-      dispatch(setAlert("Post Created"), "success");
     } catch (err) {
       console.log(err);
     }

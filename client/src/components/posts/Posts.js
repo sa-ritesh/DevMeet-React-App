@@ -11,7 +11,7 @@ function Posts(props) {
   const { posts, loading } = post;
   useEffect(() => {
     props.dispatch(getPosts());
-  }, [posts]);
+  }, []);
   return loading ? (
     <Spinner />
   ) : (
