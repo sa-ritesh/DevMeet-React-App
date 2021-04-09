@@ -8,6 +8,7 @@ import ProfileTop from "./ProfileTop";
 import ProfileExperience from "./ProfileExperience";
 import ProfileEducation from "./ProfileEducation";
 import ProfileGithub from "./ProfileGithub";
+import Alert from "../layout/Alert";
 
 function Profile({ match, profile: { profile, loading }, auth, dispatch }) {
   useEffect(() => {
@@ -19,6 +20,7 @@ function Profile({ match, profile: { profile, loading }, auth, dispatch }) {
         <Spinner />
       ) : (
         <Fragment>
+          <Alert />
           <Link to="/profiles" className="btn btn-light">
             Back to Profiles
           </Link>
