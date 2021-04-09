@@ -2,8 +2,13 @@ import React, { Fragment } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import Moment from "react-moment";
+import { deleteEducation } from "../../actions/profile";
 
-function Education({ education }) {
+function Education(props) {
+  const { education } = props;
+  const handleDelete = (e) => {
+    props.dispatch(deleteEducation(e));
+  };
   const educations = education.map((exp) => (
     <tr key={exp._id}>
       <td>{exp.school}</td>
@@ -17,7 +22,12 @@ function Education({ education }) {
         )}
       </td>
       <td>
-        <button className="btn btn-danger">Delete</button>
+        <button
+          className="btn btn-danger"
+          onClick={() => handleDelete(exp._id)}
+        >
+          Delete
+        </button>
       </td>
     </tr>
   ));

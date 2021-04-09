@@ -2,9 +2,13 @@ import React, { Fragment } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import Moment from "react-moment";
+import { deleteExperience } from "../../actions/profile";
 
-function Experience({ experience }) {
-  const experiences = experience.map((exp) => (
+function Experience(props) {
+  const handleDelete = (e) => {
+    props.dispatch(deleteExperience(e));
+  };
+  const experiences = props.experience.map((exp) => (
     <tr key={exp._id}>
       <td>{exp.company}</td>
       <td className="hide-sm">{exp.title}</td>
@@ -17,7 +21,12 @@ function Experience({ experience }) {
         )}
       </td>
       <td>
-        <button className="btn btn-danger">Delete</button>
+        <button
+          className="btn btn-danger"
+          onClick={() => handleDelete(exp._id)}
+        >
+          Delete
+        </button>
       </td>
     </tr>
   ));
