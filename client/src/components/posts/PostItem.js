@@ -2,7 +2,7 @@ import { connect } from "react-redux";
 import React from "react";
 import Moment from "react-moment";
 import { Link } from "react-router-dom";
-import { addLike, removeLike } from "../../actions/post";
+import { addLike, deletPost, removeLike } from "../../actions/post";
 
 function PostItem(props) {
   const { auth, post } = props;
@@ -43,7 +43,11 @@ function PostItem(props) {
           )}
         </Link>
         {!auth.loading && user === auth.user._id && (
-          <button type="button" className="btn btn-danger">
+          <button
+            type="button"
+            className="btn btn-danger"
+            onClick={(e) => props.dispatch(deletPost(_id))}
+          >
             <i className="fas fa-times"></i>
           </button>
         )}
@@ -54,6 +58,7 @@ function PostItem(props) {
 function mapStateToProps(state) {
   return {
     auth: state.auth,
+    posts: state.post.posts,
   };
 }
 export default connect(mapStateToProps)(PostItem);

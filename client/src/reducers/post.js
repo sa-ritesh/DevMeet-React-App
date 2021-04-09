@@ -1,4 +1,9 @@
-import { GET_POSTS, POST_ERROR, UPDATE_LIKE } from "../actions/types";
+import {
+  DELETE_POST,
+  GET_POSTS,
+  POST_ERROR,
+  UPDATE_LIKE,
+} from "../actions/types";
 const initialState = {
   posts: [],
   post: null,
@@ -28,6 +33,12 @@ export default function post(state = initialState, action) {
             ? { ...post, likes: payload.likes }
             : post,
         ),
+        loading: false,
+      };
+    case DELETE_POST:
+      return {
+        ...state,
+        posts: state.posts.filter((post) => post._id != payload.postId),
         loading: false,
       };
     default:
