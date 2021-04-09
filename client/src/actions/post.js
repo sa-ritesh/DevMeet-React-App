@@ -1,7 +1,14 @@
 import axios from "axios";
 import setAuthToken from "../utils/setAuthToken";
 import { setAlert } from "./alert";
-import { DELETE_POST, GET_POSTS, POST_ERROR, UPDATE_LIKE } from "./types";
+import {
+  ADD_POST,
+  DELETE_POST,
+  GET_POST,
+  GET_POSTS,
+  POST_ERROR,
+  UPDATE_LIKE,
+} from "./types";
 // Get Posts
 export const getPosts = () => {
   return async (dispatch) => {
@@ -82,6 +89,49 @@ export const deletPost = (postId) => {
         payload: postId,
       });
       dispatch(setAlert("Post has been Deleted Successfully"), "success");
+    } catch (err) {
+      console.log(err);
+    }
+  };
+};
+
+export const addPost = (formData) => {
+  return async (dispatch) => {
+    if (localStorage.token) {
+      setAuthToken(localStorage.token);
+    }
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+    try {
+      const res = await axios.post(`/api/posts`, formData, config);
+
+      dispatch({
+        type: ADD_POST,
+        payload: res.data,
+      });
+      dispatch(setAlert("Post Created"), "success");
+    } catch (err) {
+      console.log(err);
+    }
+  };
+};
+
+export const getPost = (postId) => {
+  return async (dispatch) => {
+    if (localStorage.token) {
+      setAuthToken(localStorage.token);
+    }
+    try {
+      const res = await axios.get(`/api/posts/${postId}`);
+
+      dispatch({
+        type: GET_POST,
+        payload: res.data,
+      });
+      dispatch(setAlert("Post Created"), "success");
     } catch (err) {
       console.log(err);
     }

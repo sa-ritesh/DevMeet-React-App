@@ -4,6 +4,7 @@ import { getPosts } from "../../actions/post";
 import Spinner from "../layout/Spinner";
 import PostItem from "./PostItem";
 import Alert from "../layout/Alert";
+import PostForm from "./PostForm";
 
 function Posts(props) {
   const { post } = props;
@@ -20,7 +21,7 @@ function Posts(props) {
       <p className="lead">
         <i className="fas fa-user"></i> Welcome to the community
       </p>
-
+      <PostForm />
       <div className="posts">
         {posts.map((post) => (
           <PostItem key={post._id} post={post} />
