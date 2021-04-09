@@ -254,7 +254,7 @@ export const getProfileById = (userId) => {
 export const getGithubRepos = (username) => {
   return async (dispatch) => {
     try {
-      const res = await axios.get(`api/profile/github/${username}`);
+      const res = await axios.get(`/api/profile/github/${username}`);
       dispatch({
         type: GET_REPOS,
         payload: res.data,
@@ -264,13 +264,6 @@ export const getGithubRepos = (username) => {
       if (errors) {
         errors.forEach((error) => dispatch(setAlert(error.msg, "danger")));
       }
-      dispatch({
-        type: PROFILE_ERROR,
-        payload: {
-          msg: err.response.statusText,
-          status: err.response.status,
-        },
-      });
     }
   };
 };

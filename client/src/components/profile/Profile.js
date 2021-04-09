@@ -7,6 +7,7 @@ import ProfileAbout from "./ProfileAbout";
 import ProfileTop from "./ProfileTop";
 import ProfileExperience from "./ProfileExperience";
 import ProfileEducation from "./ProfileEducation";
+import ProfileGithub from "./ProfileGithub";
 
 function Profile({ match, profile: { profile, loading }, auth, dispatch }) {
   useEffect(() => {
@@ -61,6 +62,9 @@ function Profile({ match, profile: { profile, loading }, auth, dispatch }) {
                 <h4>No Education Credentials</h4>
               )}
             </div>
+            {profile.githubusername && (
+              <ProfileGithub username={profile.githubusername} />
+            )}
           </div>
         </Fragment>
       )}
