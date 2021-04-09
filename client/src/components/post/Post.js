@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { getPost } from "../../actions/post";
 import PostItem from "../posts/PostItem";
+import CommentForm from "./CommentForm";
 
 function Post(props) {
   const { post, loading } = props.post;
@@ -17,6 +18,7 @@ function Post(props) {
         Back To Posts
       </Link>
       <PostItem post={post} showActions={false} />
+      <CommentForm postId={post._id} />
       <div className="comments"></div>
     </Fragment>
   );

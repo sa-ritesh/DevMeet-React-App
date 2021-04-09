@@ -2,11 +2,13 @@ import axios from "axios";
 import setAuthToken from "../utils/setAuthToken";
 import { setAlert } from "./alert";
 import {
+  ADD_COMMENT,
   ADD_POST,
   DELETE_POST,
   GET_POST,
   GET_POSTS,
   POST_ERROR,
+  REMOVE_COMMENT,
   UPDATE_LIKE,
 } from "./types";
 // Get Posts
@@ -131,6 +133,53 @@ export const getPost = (postId) => {
         type: GET_POST,
         payload: res.data,
       });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+};
+
+export const addComment = (postId, formData) => {
+  return async (dispatch) => {
+    if (localStorage.token) {
+      setAuthToken(localStorage.token);
+    }
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+    try {
+      const res = await axios.post(
+        `/api/posts/comment/${postId}`,
+        formData,
+        config,
+      );
+
+      dispatch({
+        type: ADD_COMMENT,
+        payload: res.data,
+      });
+      dispatch(setAlert("Comment Added"), "success");
+    } catch (err) {
+      console.log(err);
+    }
+  };
+};
+
+export const deleteComment = (postId, commentId) => {
+  return async (dispatch) => {
+    if (localStorage.token) {
+      setAuthToken(localStorage.token);
+    }
+    try {
+      const res = await axios.post(`/api/posts/comment/${postId}/${commentId}`);
+
+      dispatch({
+        type: REMOVE_COMMENT,
+        payload: commentId,
+      });
+      dispatch(setAlert("Comment Removed"), "success");
     } catch (err) {
       console.log(err);
     }
