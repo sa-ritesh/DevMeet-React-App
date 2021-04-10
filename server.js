@@ -10,9 +10,6 @@ const path = require("path");
 connectDB();
 app.set("port", PORT);
 //Initialising Routes
-app.get("/", function (req, res) {
-  res.redirect("/");
-});
 app.use("/api/users", require("./routes/api/users"));
 app.use("/api/posts", require("./routes/api/posts"));
 app.use("/api/auth", require("./routes/api/auth"));
