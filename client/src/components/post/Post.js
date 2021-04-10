@@ -2,6 +2,7 @@ import React, { Fragment, useEffect } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { getPost } from "../../actions/post";
+import Alert from "../layout/Alert";
 import Spinner from "../layout/Spinner";
 import PostItem from "../posts/PostItem";
 import CommentForm from "./CommentForm";
@@ -16,6 +17,7 @@ function Post(props) {
     <Spinner />
   ) : (
     <Fragment>
+      <Alert />
       <Link to="/posts" className="btn">
         Back To Posts
       </Link>

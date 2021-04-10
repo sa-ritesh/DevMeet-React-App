@@ -9,12 +9,17 @@ import {
   GET_POSTS,
   POST_ERROR,
   REMOVE_COMMENT,
+  REMOVE_POST_LOADER,
+  SET_POST_LOADER,
   UPDATE_LIKE,
 } from "./types";
 // Get Posts
 export const getPosts = () => {
   return async (dispatch) => {
     try {
+      dispatch({
+        type: SET_POST_LOADER,
+      });
       if (localStorage.token) {
         setAuthToken(localStorage.token);
       }
@@ -26,11 +31,7 @@ export const getPosts = () => {
       });
     } catch (err) {
       dispatch({
-        type: POST_ERROR,
-        payload: {
-          msg: err.response.statusText,
-          status: err.response.status,
-        },
+        type: REMOVE_POST_LOADER,
       });
     }
   };
@@ -39,6 +40,9 @@ export const getPosts = () => {
 export const addLike = (postId) => {
   return async (dispatch) => {
     try {
+      dispatch({
+        type: SET_POST_LOADER,
+      });
       if (localStorage.token) {
         setAuthToken(localStorage.token);
       }
@@ -50,12 +54,18 @@ export const addLike = (postId) => {
       });
     } catch (err) {
       console.log(err);
+      dispatch({
+        type: REMOVE_POST_LOADER,
+      });
     }
   };
 };
 //remove like
 export const removeLike = (postId) => {
   return async (dispatch) => {
+    dispatch({
+      type: SET_POST_LOADER,
+    });
     try {
       if (localStorage.token) {
         setAuthToken(localStorage.token);
@@ -68,11 +78,7 @@ export const removeLike = (postId) => {
       });
     } catch (err) {
       dispatch({
-        type: POST_ERROR,
-        payload: {
-          msg: err.response.statusText,
-          status: err.response.status,
-        },
+        type: REMOVE_POST_LOADER,
       });
     }
   };
@@ -81,6 +87,9 @@ export const removeLike = (postId) => {
 export const deletPost = (postId) => {
   return async (dispatch) => {
     try {
+      dispatch({
+        type: SET_POST_LOADER,
+      });
       if (localStorage.token) {
         setAuthToken(localStorage.token);
       }
@@ -93,12 +102,18 @@ export const deletPost = (postId) => {
       dispatch(setAlert("Post has been Deleted Successfully"), "success");
     } catch (err) {
       console.log(err);
+      dispatch({
+        type: REMOVE_POST_LOADER,
+      });
     }
   };
 };
 
 export const addPost = (formData) => {
   return async (dispatch) => {
+    dispatch({
+      type: SET_POST_LOADER,
+    });
     if (localStorage.token) {
       setAuthToken(localStorage.token);
     }
@@ -117,12 +132,18 @@ export const addPost = (formData) => {
       dispatch(setAlert("Post Created"), "success");
     } catch (err) {
       console.log(err);
+      dispatch({
+        type: REMOVE_POST_LOADER,
+      });
     }
   };
 };
 
 export const getPost = (postId) => {
   return async (dispatch) => {
+    dispatch({
+      type: SET_POST_LOADER,
+    });
     if (localStorage.token) {
       setAuthToken(localStorage.token);
     }
@@ -135,12 +156,18 @@ export const getPost = (postId) => {
       });
     } catch (err) {
       console.log(err);
+      dispatch({
+        type: REMOVE_POST_LOADER,
+      });
     }
   };
 };
 
 export const addComment = (postId, formData) => {
   return async (dispatch) => {
+    dispatch({
+      type: SET_POST_LOADER,
+    });
     if (localStorage.token) {
       setAuthToken(localStorage.token);
     }
@@ -163,17 +190,25 @@ export const addComment = (postId, formData) => {
       dispatch(setAlert("Comment Added"), "success");
     } catch (err) {
       console.log(err);
+      dispatch({
+        type: REMOVE_POST_LOADER,
+      });
     }
   };
 };
 
 export const deleteComment = (postId, commentId) => {
   return async (dispatch) => {
+    dispatch({
+      type: SET_POST_LOADER,
+    });
     if (localStorage.token) {
       setAuthToken(localStorage.token);
     }
     try {
-      const res = await axios.post(`/api/posts/comment/${postId}/${commentId}`);
+      const res = await axios.delete(
+        `/api/posts/comment/${postId}/${commentId}`,
+      );
 
       dispatch({
         type: REMOVE_COMMENT,
@@ -182,6 +217,9 @@ export const deleteComment = (postId, commentId) => {
       dispatch(setAlert("Comment Removed"), "success");
     } catch (err) {
       console.log(err);
+      dispatch({
+        type: REMOVE_POST_LOADER,
+      });
     }
   };
 };

@@ -6,6 +6,8 @@ import {
   GET_POSTS,
   POST_ERROR,
   REMOVE_COMMENT,
+  REMOVE_POST_LOADER,
+  SET_POST_LOADER,
   UPDATE_LIKE,
 } from "../actions/types";
 const initialState = {
@@ -54,7 +56,7 @@ export default function post(state = initialState, action) {
     case DELETE_POST:
       return {
         ...state,
-        posts: state.posts.filter((post) => post._id != payload.postId),
+        posts: state.posts.filter((post) => post._id !== payload),
         loading: false,
       };
     case ADD_COMMENT:
@@ -72,6 +74,16 @@ export default function post(state = initialState, action) {
             (comment) => comment._id !== payload,
           ),
         },
+        loading: false,
+      };
+    case SET_POST_LOADER:
+      return {
+        ...state,
+        loading: true,
+      };
+    case REMOVE_POST_LOADER:
+      return {
+        ...state,
         loading: false,
       };
     default:
