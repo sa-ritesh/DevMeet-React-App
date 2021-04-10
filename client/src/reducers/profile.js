@@ -4,6 +4,8 @@ import {
   GET_PROFILES,
   GET_REPOS,
   PROFILE_ERROR,
+  REMOVE_PROFILE_LOADER,
+  SET_PROFILE_LOADER,
   UPDATE_PROFILE,
 } from "../actions/types";
 
@@ -49,6 +51,16 @@ export default function profile(state = initialState, action) {
       return {
         ...state,
         repos: payload,
+        loading: false,
+      };
+    case SET_PROFILE_LOADER:
+      return {
+        ...state,
+        loading: true,
+      };
+    case REMOVE_PROFILE_LOADER:
+      return {
+        ...state,
         loading: false,
       };
 
