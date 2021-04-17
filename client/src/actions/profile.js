@@ -22,7 +22,9 @@ export const getCurrentProfile = () => {
       if (localStorage.token) {
         setAuthToken(localStorage.token);
       }
-      const res = await axios.get("api/profile/me");
+      const res = await axios.get(
+        "https://ritesh-dev-meet.herokuapp.com/api/profile/me",
+      );
       dispatch({
         type: GET_PROFILE,
         payload: res.data,
@@ -59,7 +61,11 @@ export const createProfile = (formData, history, edit = false) => async (
       setAuthToken(localStorage.token);
     }
 
-    const res = await axios.post("/api/profile", formData, config);
+    const res = await axios.post(
+      "https://ritesh-dev-meet.herokuapp.com/api/profile",
+      formData,
+      config,
+    );
     dispatch({
       type: GET_PROFILE,
       payload: res.data.profile,
@@ -85,7 +91,11 @@ export const addExperience = (formData, history) => {
         },
       };
 
-      const res = await axios.put("/api/profile/experience", formData, config);
+      const res = await axios.put(
+        "https://ritesh-dev-meet.herokuapp.com/api/profile/experience",
+        formData,
+        config,
+      );
       dispatch({
         type: UPDATE_PROFILE,
         payload: res.data,
@@ -122,7 +132,11 @@ export const addEducation = (formData, history) => {
         },
       };
 
-      const res = await axios.put("/api/profile/education", formData, config);
+      const res = await axios.put(
+        "https://ritesh-dev-meet.herokuapp.com/api/profile/education",
+        formData,
+        config,
+      );
       dispatch({
         type: UPDATE_PROFILE,
         payload: res.data,
@@ -154,7 +168,9 @@ export const deleteExperience = (id) => {
       if (localStorage.token) {
         setAuthToken(localStorage.token);
       }
-      const res = await axios.delete(`/api/profile/experience/${id}`);
+      const res = await axios.delete(
+        `https://ritesh-dev-meet.herokuapp.com/api/profile/experience/${id}`,
+      );
       console.log("delete exp res-data", res.data);
       dispatch({
         type: UPDATE_PROFILE,
@@ -181,7 +197,9 @@ export const deleteEducation = (id) => {
       if (localStorage.token) {
         setAuthToken(localStorage.token);
       }
-      const res = await axios.delete(`/api/profile/education/${id}`);
+      const res = await axios.delete(
+        `https://ritesh-dev-meet.herokuapp.com/api/profile/education/${id}`,
+      );
       dispatch({
         type: UPDATE_PROFILE,
         payload: res.data,
@@ -205,7 +223,9 @@ export const deleteAccount = () => {
         dispatch({
           type: SET_PROFILE_LOADER,
         });
-        const res = await axios.delete(`/api/profile`);
+        const res = await axios.delete(
+          `https://ritesh-dev-meet.herokuapp.com/api/profile`,
+        );
         dispatch({
           type: CLEAR_PROFILE,
         });
@@ -235,7 +255,9 @@ export const getProfiles = () => {
       type: CLEAR_PROFILE,
     });
     try {
-      const res = await axios.get("api/profile");
+      const res = await axios.get(
+        "https://ritesh-dev-meet.herokuapp.com/api/profile",
+      );
       dispatch({
         type: GET_PROFILES,
         payload: res.data,
@@ -262,7 +284,9 @@ export const getProfileById = (userId) => {
       dispatch({
         type: SET_PROFILE_LOADER,
       });
-      const res = await axios.get(`/api/profile/user/${userId}`);
+      const res = await axios.get(
+        `https://ritesh-dev-meet.herokuapp.com/api/profile/user/${userId}`,
+      );
       dispatch({
         type: GET_PROFILE,
         payload: res.data,
@@ -285,7 +309,9 @@ export const getProfileById = (userId) => {
 export const getGithubRepos = (username) => {
   return async (dispatch) => {
     try {
-      const res = await axios.get(`/api/profile/github/${username}`);
+      const res = await axios.get(
+        `https://ritesh-dev-meet.herokuapp.com/api/profile/github/${username}`,
+      );
       dispatch({
         type: GET_REPOS,
         payload: res.data,

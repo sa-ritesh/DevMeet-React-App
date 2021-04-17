@@ -23,7 +23,9 @@ export const getPosts = () => {
       if (localStorage.token) {
         setAuthToken(localStorage.token);
       }
-      const res = await axios.get("/api/posts");
+      const res = await axios.get(
+        "https://ritesh-dev-meet.herokuapp.com/api/posts",
+      );
 
       dispatch({
         type: GET_POSTS,
@@ -46,7 +48,9 @@ export const addLike = (postId) => {
       if (localStorage.token) {
         setAuthToken(localStorage.token);
       }
-      const res = await axios.put(`/api/posts/like/${postId}`);
+      const res = await axios.put(
+        `https://ritesh-dev-meet.herokuapp.com/api/posts/like/${postId}`,
+      );
 
       dispatch({
         type: UPDATE_LIKE,
@@ -70,7 +74,9 @@ export const removeLike = (postId) => {
       if (localStorage.token) {
         setAuthToken(localStorage.token);
       }
-      const res = await axios.put(`/api/posts/unlike/${postId}`);
+      const res = await axios.put(
+        `https://ritesh-dev-meet.herokuapp.com/api/posts/unlike/${postId}`,
+      );
 
       dispatch({
         type: UPDATE_LIKE,
@@ -93,7 +99,9 @@ export const deletPost = (postId) => {
       if (localStorage.token) {
         setAuthToken(localStorage.token);
       }
-      const res = await axios.delete(`/api/posts/${postId}`);
+      const res = await axios.delete(
+        `https://ritesh-dev-meet.herokuapp.com/api/posts/${postId}`,
+      );
 
       dispatch({
         type: DELETE_POST,
@@ -123,7 +131,11 @@ export const addPost = (formData) => {
       },
     };
     try {
-      const res = await axios.post(`/api/posts`, formData, config);
+      const res = await axios.post(
+        `https://ritesh-dev-meet.herokuapp.com/api/posts`,
+        formData,
+        config,
+      );
 
       dispatch({
         type: ADD_POST,
@@ -148,7 +160,9 @@ export const getPost = (postId) => {
       setAuthToken(localStorage.token);
     }
     try {
-      const res = await axios.get(`/api/posts/${postId}`);
+      const res = await axios.get(
+        `https://ritesh-dev-meet.herokuapp.com/api/posts/${postId}`,
+      );
 
       dispatch({
         type: GET_POST,
@@ -178,7 +192,7 @@ export const addComment = (postId, formData) => {
     };
     try {
       const res = await axios.post(
-        `/api/posts/comment/${postId}`,
+        `https://ritesh-dev-meet.herokuapp.com/api/posts/comment/${postId}`,
         formData,
         config,
       );
@@ -207,7 +221,7 @@ export const deleteComment = (postId, commentId) => {
     }
     try {
       const res = await axios.delete(
-        `/api/posts/comment/${postId}/${commentId}`,
+        `https://ritesh-dev-meet.herokuapp.com/api/posts/comment/${postId}/${commentId}`,
       );
 
       dispatch({
