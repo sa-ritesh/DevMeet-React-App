@@ -5,10 +5,12 @@ app.use(express.json({ extended: false }));
 const connectDB = require("./config/db");
 const router = require("./routes/api/users");
 const PORT = process.env.PORT || 5000;
+const cors = require("cors");
 const path = require("path");
 // Connecting DB
 connectDB();
 //Initialising Routes
+app.use(cors());
 app.use("/api/users", require("./routes/api/users"));
 app.use("/api/posts", require("./routes/api/posts"));
 app.use("/api/auth", require("./routes/api/auth"));
