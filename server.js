@@ -6,11 +6,15 @@ const connectDB = require("./config/db");
 const router = require("./routes/api/users");
 const PORT = process.env.PORT || 5000;
 const cors = require("cors");
+var corsOptions = {
+  origin: "https://vigilant-johnson-6c524a.netlify.app/",
+  optionsSuccessStatus: 200, // For legacy browser support
+};
 const path = require("path");
 // Connecting DB
 connectDB();
 //Initialising Routes
-app.use(cors());
+app.use(cors(corsOptions));
 app.use("/api/users", require("./routes/api/users"));
 app.use("/api/posts", require("./routes/api/posts"));
 app.use("/api/auth", require("./routes/api/auth"));
