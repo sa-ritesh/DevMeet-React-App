@@ -19,7 +19,7 @@ export const loadUser = () => {
     }
     try {
       const res = await axios.get(
-        "https://sa-ritesh-devmeet.herokuapp.com/api/auth",
+        "https://cors-anywhere.herokuapp.com/https://sa-ritesh-devmeet.herokuapp.com/api/auth",
       );
       dispatch({
         type: USER_LOADED,
@@ -43,7 +43,7 @@ export const register = ({ name, email, password }) => async (dispatch) => {
   const body = JSON.stringify({ name, email, password });
   try {
     const res = await axios.post(
-      "https://sa-ritesh-devmeet.herokuapp.com/api/users",
+      "https://cors-anywhere.herokuapp.com/https://sa-ritesh-devmeet.herokuapp.com/api/users",
       body,
       config,
     );
@@ -74,7 +74,7 @@ export const login = (email, password) => async (dispatch) => {
   const body = JSON.stringify({ email, password });
   try {
     const res = await axios.post(
-      "https://sa-ritesh-devmeet.herokuapp.com/api/auth",
+      "https://cors-anywhere.herokuapp.com/https://sa-ritesh-devmeet.herokuapp.com/api/auth",
       body,
       config,
     );

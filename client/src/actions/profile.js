@@ -23,7 +23,7 @@ export const getCurrentProfile = () => {
         setAuthToken(localStorage.token);
       }
       const res = await axios.get(
-        "https://sa-ritesh-devmeet.herokuapp.com/api/profile/me",
+        "https://cors-anywhere.herokuapp.com/https://sa-ritesh-devmeet.herokuapp.com/api/profile/me",
       );
       dispatch({
         type: GET_PROFILE,
@@ -62,7 +62,7 @@ export const createProfile = (formData, history, edit = false) => async (
     }
 
     const res = await axios.post(
-      "https://sa-ritesh-devmeet.herokuapp.com/api/profile",
+      "https://cors-anywhere.herokuapp.com/https://sa-ritesh-devmeet.herokuapp.com/api/profile",
       formData,
       config,
     );
@@ -92,7 +92,7 @@ export const addExperience = (formData, history) => {
       };
 
       const res = await axios.put(
-        "https://sa-ritesh-devmeet.herokuapp.com/api/profile/experience",
+        "https://cors-anywhere.herokuapp.com/https://sa-ritesh-devmeet.herokuapp.com/api/profile/experience",
         formData,
         config,
       );
@@ -133,7 +133,7 @@ export const addEducation = (formData, history) => {
       };
 
       const res = await axios.put(
-        "https://sa-ritesh-devmeet.herokuapp.com/api/profile/education",
+        "https://cors-anywhere.herokuapp.com/https://sa-ritesh-devmeet.herokuapp.com/api/profile/education",
         formData,
         config,
       );
@@ -169,7 +169,7 @@ export const deleteExperience = (id) => {
         setAuthToken(localStorage.token);
       }
       const res = await axios.delete(
-        `https://sa-ritesh-devmeet.herokuapp.com/api/profile/experience/${id}`,
+        `https://cors-anywhere.herokuapp.com/https://sa-ritesh-devmeet.herokuapp.com/api/profile/experience/${id}`,
       );
       console.log("delete exp res-data", res.data);
       dispatch({
@@ -198,7 +198,7 @@ export const deleteEducation = (id) => {
         setAuthToken(localStorage.token);
       }
       const res = await axios.delete(
-        `https://sa-ritesh-devmeet.herokuapp.com/api/profile/education/${id}`,
+        `https://cors-anywhere.herokuapp.com/https://sa-ritesh-devmeet.herokuapp.com/api/profile/education/${id}`,
       );
       dispatch({
         type: UPDATE_PROFILE,
@@ -224,7 +224,7 @@ export const deleteAccount = () => {
           type: SET_PROFILE_LOADER,
         });
         const res = await axios.delete(
-          `https://sa-ritesh-devmeet.herokuapp.com/api/profile`,
+          `https://cors-anywhere.herokuapp.com/https://sa-ritesh-devmeet.herokuapp.com/api/profile`,
         );
         dispatch({
           type: CLEAR_PROFILE,
@@ -256,7 +256,7 @@ export const getProfiles = () => {
     });
     try {
       const res = await axios.get(
-        "https://sa-ritesh-devmeet.herokuapp.com/api/profile",
+        "https://cors-anywhere.herokuapp.com/https://sa-ritesh-devmeet.herokuapp.com/api/profile",
       );
       dispatch({
         type: GET_PROFILES,
@@ -285,7 +285,7 @@ export const getProfileById = (userId) => {
         type: SET_PROFILE_LOADER,
       });
       const res = await axios.get(
-        `https://sa-ritesh-devmeet.herokuapp.com/api/profile/user/${userId}`,
+        `https://cors-anywhere.herokuapp.com/https://sa-ritesh-devmeet.herokuapp.com/api/profile/user/${userId}`,
       );
       dispatch({
         type: GET_PROFILE,
@@ -310,7 +310,7 @@ export const getGithubRepos = (username) => {
   return async (dispatch) => {
     try {
       const res = await axios.get(
-        `https://sa-ritesh-devmeet.herokuapp.com/api/profile/github/${username}`,
+        `https://cors-anywhere.herokuapp.com/https://sa-ritesh-devmeet.herokuapp.com/api/profile/github/${username}`,
       );
       dispatch({
         type: GET_REPOS,

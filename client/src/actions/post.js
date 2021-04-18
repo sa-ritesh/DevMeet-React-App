@@ -24,7 +24,7 @@ export const getPosts = () => {
         setAuthToken(localStorage.token);
       }
       const res = await axios.get(
-        "https://sa-ritesh-devmeet.herokuapp.com/api/posts",
+        "https://cors-anywhere.herokuapp.com/https://sa-ritesh-devmeet.herokuapp.com/api/posts",
       );
 
       dispatch({
@@ -49,7 +49,7 @@ export const addLike = (postId) => {
         setAuthToken(localStorage.token);
       }
       const res = await axios.put(
-        `https://sa-ritesh-devmeet.herokuapp.com/api/posts/like/${postId}`,
+        `https://cors-anywhere.herokuapp.com/https://sa-ritesh-devmeet.herokuapp.com/api/posts/like/${postId}`,
       );
 
       dispatch({
@@ -75,7 +75,7 @@ export const removeLike = (postId) => {
         setAuthToken(localStorage.token);
       }
       const res = await axios.put(
-        `https://sa-ritesh-devmeet.herokuapp.com/api/posts/unlike/${postId}`,
+        `https://cors-anywhere.herokuapp.com/https://sa-ritesh-devmeet.herokuapp.com/api/posts/unlike/${postId}`,
       );
 
       dispatch({
@@ -100,7 +100,7 @@ export const deletPost = (postId) => {
         setAuthToken(localStorage.token);
       }
       const res = await axios.delete(
-        `https://sa-ritesh-devmeet.herokuapp.com/api/posts/${postId}`,
+        `https://cors-anywhere.herokuapp.com/https://sa-ritesh-devmeet.herokuapp.com/api/posts/${postId}`,
       );
 
       dispatch({
@@ -132,7 +132,7 @@ export const addPost = (formData) => {
     };
     try {
       const res = await axios.post(
-        `https://sa-ritesh-devmeet.herokuapp.com/api/posts`,
+        `https://cors-anywhere.herokuapp.com/https://sa-ritesh-devmeet.herokuapp.com/api/posts`,
         formData,
         config,
       );
@@ -161,7 +161,7 @@ export const getPost = (postId) => {
     }
     try {
       const res = await axios.get(
-        `https://sa-ritesh-devmeet.herokuapp.com/api/posts/${postId}`,
+        `https://cors-anywhere.herokuapp.com/https://sa-ritesh-devmeet.herokuapp.com/api/posts/${postId}`,
       );
 
       dispatch({
@@ -192,7 +192,7 @@ export const addComment = (postId, formData) => {
     };
     try {
       const res = await axios.post(
-        `https://sa-ritesh-devmeet.herokuapp.com/api/posts/comment/${postId}`,
+        `https://cors-anywhere.herokuapp.com/https://sa-ritesh-devmeet.herokuapp.com/api/posts/comment/${postId}`,
         formData,
         config,
       );
@@ -221,7 +221,7 @@ export const deleteComment = (postId, commentId) => {
     }
     try {
       const res = await axios.delete(
-        `https://sa-ritesh-devmeet.herokuapp.com/api/posts/comment/${postId}/${commentId}`,
+        `https://cors-anywhere.herokuapp.com/https://sa-ritesh-devmeet.herokuapp.com/api/posts/comment/${postId}/${commentId}`,
       );
 
       dispatch({
