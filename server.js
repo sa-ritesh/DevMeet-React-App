@@ -22,6 +22,7 @@ app.use(function (req, res, next) {
     "Access-Control-Allow-Headers",
     "Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers,X-Access-Token,XKey,Authorization",
   );
+
   next();
 });
 app.use(cors());

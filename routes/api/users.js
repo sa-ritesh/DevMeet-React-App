@@ -67,7 +67,7 @@ router.post(
       //return JWT
       jwt.sign(
         payload,
-        config.get("jwtSecret"),
+        "MySecretToken",
         {
           expiresIn: 36000,
         },
