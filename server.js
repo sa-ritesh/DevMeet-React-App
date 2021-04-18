@@ -11,24 +11,25 @@ const path = require("path");
 connectDB();
 const cors = require("cors");
 const corsOptions = {
-  origin: "http://localhost:3000",
+  origin: "*",
   credentials: true, //access-control-allow-credentials:true
   optionSuccessStatus: 200,
 };
 app.use(cors(corsOptions));
 //Initialising Routes
+app.options("*", cors());
 app.use("/api/users", require("./routes/api/users"));
 app.use("/api/posts", require("./routes/api/posts"));
 app.use("/api/auth", require("./routes/api/auth"));
 app.use("/api/profile", require("./routes/api/profile"));
 
 //serve-static assets in production
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static("client/build"));
-  app.get("*", (req, res) => {
-    res.sendFile(path.solve(__dirname, "client", "build", "index.html"));
-  });
-}
+// if (process.env.NODE_ENV === "production") {
+//   app.use(express.static("client/build"));
+//   app.get("*", (req, res) => {
+//     res.sendFile(path.solve(__dirname, "client", "build", "index.html"));
+//   });
+// }
 
 app.listen(PORT, (err) => {
   if (err) {
