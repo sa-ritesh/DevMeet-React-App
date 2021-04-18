@@ -13,6 +13,14 @@ var corsOptions = {
 const path = require("path");
 // Connecting DB
 connectDB();
+app.use(function (req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept",
+  );
+  next();
+});
 //Initialising Routes
 app.use(cors(corsOptions));
 app.use("/api/users", require("./routes/api/users"));
