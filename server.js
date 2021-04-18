@@ -7,7 +7,7 @@ const router = require("./routes/api/users");
 const PORT = process.env.PORT || 5000;
 const cors = require("cors");
 var corsOptions = {
-  origin: "https://vigilant-johnson-6c524a.netlify.app",
+  origin: "*",
   optionsSuccessStatus: 200, // For legacy browser support
 };
 const path = require("path");
